@@ -1,13 +1,21 @@
 const socket = io();
+//referencias html
+const usuarioH2 = document.getElementById("usuarioH2");
+const infoSala = document.getElementById("infoSala");
 
-var params = new URLSearchParams(window.location.search);
-if (!params.has("nombre")) {
+//* code
+const params = new URLSearchParams(window.location.search);
+if (!params.has("nombre") || !params.has("sala")) {
   window.location = "index.html";
   throw new Error("El nombre es necesario!!");
 }
-var usuario = {
+const usuario = {
   nombre: params.get("nombre"),
+  sala: params.get("sala"),
 };
+
+usuarioH2.innerText = usuario.nombre;
+infoSala.innerHTML = "Estas en la sala: <b>"+usuario.sala+"</b>";
 //code here
 socket.on("connect", function () {
   console.log("Conectado al servidor");
@@ -36,12 +44,10 @@ socket.on("disconnect", function () {
 
 // *Mensajes privados
 socket.on("mensajes-privado", (data) => {
-  console.log("mensaje privado: "+ data.mensaje);
+  console.log("mensaje privado: " + data.mensaje);
 });
 
 // socket.emit("mensajes-privado",{para: "USXaFjtd5NdAwsOeAAAn", mensaje:"asdasdasdasdsadasda"})
-
-
 
 // *Mensajes publicos
 // socket.emit("crear-mensaje", { mensaje: "Mensaje de ejemplo" });

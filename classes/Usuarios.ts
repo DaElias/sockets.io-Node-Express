@@ -5,10 +5,11 @@ class Usuarios implements IUsuarios {
     this.personas = [];
   }
 
-  agregarPersonas(id: string, nombre: string): datosPersonas[] {
+  agregarPersonas(id: string, nombre: string, sala: string): datosPersonas[] {
     const persona: datosPersonas = {
       id,
       nombre,
+      sala,
     };
     this.personas.push(persona);
     return this.personas;
@@ -21,8 +22,11 @@ class Usuarios implements IUsuarios {
     return persona;
   }
 
-  getPersonasPorSala(sala: any) {
+  getPersonasPorSala(sala: string): datosPersonas[] {
     //TODO
+    return this.personas.filter(
+      (persona: datosPersonas) => persona.sala === sala
+    );
   }
 
   borrarPersona(id: string) {

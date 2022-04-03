@@ -1,12 +1,12 @@
 type datosPersonas = {
   id: string;
   nombre: string;
-  sala?: string;
+  sala: string;
 };
 
 interface IUsuarios {
   personas: datosPersonas[];
-  agregarPersonas: (id: string, nombre: string) => datosPersonas[];
+  agregarPersonas: (id: string, nombre: string, sala:string) => datosPersonas[];
   getPersona: (id: string) => datosPersonas | undefined;
   borrarPersona: (id: string) => datosPersonas | undefined;
 }
