@@ -12,7 +12,7 @@ const sokectController = (io: Socket) => {
           mensaje: "El nombre es necesario",
         });
       }
-      //* para unirse a una sala!!
+      //* para unirse a una sala!!  
       cliente.join(usuario.sala);
 
       const personas = usuarios.agregarPersonas(
@@ -24,7 +24,7 @@ const sokectController = (io: Socket) => {
       cliente.broadcast
         .to(usuario.sala)
         .emit("lista-personas", usuarios.getPersonasPorSala(usuario.sala));
-      console.log("Connection",usuario.sala);
+      // console.log("Connection",usuario.sala);
       callBack(usuarios.getPersonasPorSala(usuario.sala));
     });
 
