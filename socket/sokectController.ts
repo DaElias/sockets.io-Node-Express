@@ -24,7 +24,8 @@ const sokectController = (io: Socket) => {
       cliente.broadcast
         .to(usuario.sala)
         .emit("lista-personas", usuarios.getPersonasPorSala(usuario.sala));
-      callBack(personas);
+      console.log("Connection",usuario.sala);
+      callBack(usuarios.getPersonasPorSala(usuario.sala));
     });
 
     cliente.on("crear-mensaje", (data: crearMensajeT) => {
@@ -40,8 +41,6 @@ const sokectController = (io: Socket) => {
         .to(data.para)
         .emit("mensajes-privado", crearMensaje(personas.nombre, data.mensaje));
     });
-
-    
 
     cliente.on("disconnect", () => {
       const personaBorrada: datosPersonas = usuarios.borrarPersona(cliente.id);
